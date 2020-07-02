@@ -15,7 +15,6 @@ configurations {
 }
 
 repositories {
-    maven { url = "http://10.2.0.3:8082/repository/maven-public/" }
     maven { url = 'http://maven.aliyun.com/nexus/content/groups/public' }
     mavenCentral()
 }
