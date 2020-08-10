@@ -27,6 +27,7 @@ public class MyImportSelector implements ImportSelector, ResourceLoaderAware {
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
         Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(ComponentScan.class.getName(), true);
         AnnotationAttributes annotationAttributes = AnnotationAttributes.fromMap(attributes);
+        assert annotationAttributes != null;
         List<String> basePackages = Arrays.asList(annotationAttributes.getStringArray("basePackages"));
         System.out.println(basePackages);
 

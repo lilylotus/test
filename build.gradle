@@ -32,3 +32,46 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
+def branchName = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+def branchCommitId = "git rev-parse HEAD".execute().text.trim()
+
+bootJar {
+    manifest {
+        attributes "branchName": "$branchName"
+        attributes "commitId": "$branchCommitId"
+        /*attributes("branchName": "$branchName",
+                "commitId": "$branchCommitId")*/
+    }
+}
+
+tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
+
+
+/*task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}*/
+
+/* sourceSets.main.allJava / sourceSets.main.allSource */
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}

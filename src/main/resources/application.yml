@@ -3,3 +3,5 @@ app:
 
 server:
   port: 9091
+  tomcat:
+    uri-encoding: UTF-8
