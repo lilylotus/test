@@ -5,7 +5,7 @@ import cn.nihility.selector.ImportSelectorConfig;
 import cn.nihility.selector.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class ApplicationStart {
+public class ApplicationImportSelectorStart {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();

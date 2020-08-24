@@ -4,13 +4,12 @@ import cn.nihility.entity.DogWalk;
 import cn.nihility.entity.PersonWalk;
 import cn.nihility.entity.Walk;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Configuration;
 
-//@Configuration
-@Import(MyImportBeanDefinitionRegistrar.class)
-@MapperScan({"cn.nihility.registrar.mapper"})
-@ComponentScan(basePackages = {"cn.nihility.aware"})
+@Configuration
+//@Import(MyImportBeanDefinitionRegistrar.class)
+@MapperScan(value = {"cn.nihility.registrar.mapper"})
+//@ComponentScan(basePackages = {"cn.nihility.aware"})
 public class RegistrarConfiguration {
 
     /**

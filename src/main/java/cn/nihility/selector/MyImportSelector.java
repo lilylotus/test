@@ -1,7 +1,6 @@
 package cn.nihility.selector;
 
 import org.springframework.context.ResourceLoaderAware;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.io.Resource;
@@ -25,10 +24,10 @@ public class MyImportSelector implements ImportSelector, ResourceLoaderAware {
 
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(ComponentScan.class.getName(), true);
+        Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(ImportScan.class.getName(), true);
         AnnotationAttributes annotationAttributes = AnnotationAttributes.fromMap(attributes);
         assert annotationAttributes != null;
-        List<String> basePackages = Arrays.asList(annotationAttributes.getStringArray("basePackages"));
+        List<String> basePackages = Arrays.asList(annotationAttributes.getStringArray("value"));
         System.out.println(basePackages);
 
         List<String> clazzNameList = new ArrayList<>();

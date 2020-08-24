@@ -24,26 +24,6 @@ public class ApplicationRegistryStart {
         /*Object myBean = ctx.getBean("&myFactoryBean");
         System.out.println(myBean);*/
 
-        UserMapper02 userMapper02 = MyApplicationContextAware.getBean(UserMapper02.class);
-        User user1 = userMapper02.selectUserById(1);
-        System.out.println(user1);
-
-        DogWalk dogWalk = MyApplicationContextAware.getBean(DogWalk.class);
-        System.out.println(dogWalk);
-
-        Walk walk = (Walk) MyApplicationContextAware.getBean("personWalkxxxx");
-        walk.walk();
-
-        walk = (Walk) MyApplicationContextAware.getBean("dogWalkxxxx");
-        walk.walk();
-
-
-        Walk walk1 = (Walk) MyApplicationContextAware.getBean("getWalk");
-        walk1.walk();
-
-        PersonWalk personWalkxxxx = MyApplicationContextAware.getBean("personWalkxxxx", PersonWalk.class);
-        personWalkxxxx.walk();
-
         ctx.registerShutdownHook();
     }
 
