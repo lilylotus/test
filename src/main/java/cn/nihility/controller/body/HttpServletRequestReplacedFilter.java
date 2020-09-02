@@ -15,7 +15,7 @@ public class HttpServletRequestReplacedFilter implements Filter {
         if (null == wrapperServletRequest) {
             chain.doFilter(request, response);
         } else {
-            chain.doFilter(request, response);
+            chain.doFilter(wrapperServletRequest, response);
         }
     }
 }
