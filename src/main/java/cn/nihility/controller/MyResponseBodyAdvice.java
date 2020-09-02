@@ -3,6 +3,7 @@ package cn.nihility.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -12,8 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice(basePackages = {"cn.nihility.controller"})
-public class MyResponseBodyAdvice implements ResponseBodyAdvice<Object> {
+@RestControllerAdvice
+public class MyResponseBodyAdvice implements ResponseBodyAdvice<Object>, Ordered {
 
     private static final Logger log = LoggerFactory.getLogger(MyResponseBodyAdvice.class);
 
@@ -27,11 +28,24 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         log.info("MyResponseBodyAdvice -> beforeBodyWrite body [{}] MethodParameter [{}] MediaType [{}]", body, returnType.getMember(), selectedContentType.getType());
 
-        Map<String, Object> unify = new HashMap<>();
-        unify.put("apiVersion", "1.0.1");
-        unify.put("data", body);
-        unify.put("message", "统一请求");
+        if ("text".equals(selectedContentType.getType())) {
+            return "{" +
+                    "\"apiVersion\"" + ":" + "\"1.0.1\"," +
+                    "\"data\"" + ":" + "\"" + body + "\"," +
+                    "\"message\"" + ":" + "\"MyResponseBodyAdvice 统一请求\"" +
+                    "}";
+        } else {
+            Map<String, Object> unifyMap = new HashMap<>(8);
+            unifyMap.put("apiVersion", "1.0.1");
+            unifyMap.put("data", body);
+            unifyMap.put("message", "MyResponseBodyAdvice 统一请求");
+            return unifyMap;
+        }
 
-        return unify;
+    }
+
+    @Override
+    public int getOrder() {
+        return HIGHEST_PRECEDENCE;
     }
 }
