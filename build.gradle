@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.apache.commons:commons-lang3:3.10'
+    implementation 'commons-codec:commons-codec:1.14'
     implementation 'commons-io:commons-io:2.7'
 
     /* spring boot redis 操作 */
@@ -34,6 +35,9 @@ dependencies {
     implementation 'org.apache.commons:commons-pool2:2.8.1'
     /* redis 分布式锁 */
     implementation 'org.redisson:redisson:3.13.4'
+
+    /* jwt token */
+    implementation 'com.auth0:java-jwt:3.10.3'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
