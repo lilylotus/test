@@ -7,7 +7,7 @@ public class MapperProxy {
 
     public static UserMapper getProxyUserMapper() {
         return (UserMapper) Proxy.newProxyInstance(UserMapper.class.getClassLoader(),
-                new Class<?>[] {UserMapper.class},
+                new Class<?>[]{UserMapper.class},
                 (proxy, method, args1) -> {
                     System.out.println("proxy object : " + proxy.getClass().getName());
                     System.out.println("proxy method : " + method.getName());

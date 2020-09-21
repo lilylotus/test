@@ -59,7 +59,7 @@ public class ZSetCacheServiceImpl implements ZSetCacheService {
     /**
      * 用于获取满足非score的排序取值。这个排序只有在有相同分数的情况下才能使用，如果有不同的分数则返回值不确定。
      *
-     * @param key   键
+     * @param key 键
      * @return 返回SET
      */
     public Set<Object> rangeByLex(String key, RedisZSetCommands.Range range) {

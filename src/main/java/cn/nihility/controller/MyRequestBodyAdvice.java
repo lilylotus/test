@@ -57,7 +57,7 @@ public class MyRequestBodyAdvice implements RequestBodyAdvice {
         return body;
     }
 
-    class MyHttpInputMessage implements  HttpInputMessage {
+    class MyHttpInputMessage implements HttpInputMessage {
         HttpHeaders headers;
         InputStream body;
 

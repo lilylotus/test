@@ -1,9 +1,9 @@
 package cn.nihility.controller;
 
 public enum StatusCode {
-    Success(0,"成功"),
-    Fail(-1,"失败"),
-    InvalidParams(200,"无效的参数");
+    Success(0, "成功"),
+    Fail(-1, "失败"),
+    InvalidParams(200, "无效的参数");
 
     private Integer code;
     private String msg;

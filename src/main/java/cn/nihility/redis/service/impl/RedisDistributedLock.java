@@ -41,20 +41,20 @@ public class RedisDistributedLock extends AbstractDistributedLock {
     public boolean lock(String key, long expire, int retryTimes, long sleepMillis) {
         boolean result = setRedis(key, expire);
         // 如果获取锁失败，按照传入的重试次数进行重试
-        while((!result) && retryTimes-- > 0){
+        while ((!result) && retryTimes-- > 0) {
             try {
                 log.info("lock failed, retrying..." + retryTimes);
                 Thread.sleep(sleepMillis);
             } catch (InterruptedException e) {
                 return false;
             }
-            result = setRedis(key , expire);
+            result = setRedis(key, expire);
         }
         return result;
     }
 
     private boolean setRedis(final String key, final long expire) {
-        try{
+        try {
             RedisCallback<Boolean> callback = (connection) -> {
                 String uuid = UUID.randomUUID().toString();
                 lockFlag.set(uuid);
@@ -75,7 +75,7 @@ public class RedisDistributedLock extends AbstractDistributedLock {
         try {
             RedisCallback<Boolean> callback = (connection) -> {
                 String value = lockFlag.get();
-                return connection.eval(UNLOCK_LUA.getBytes(), ReturnType.BOOLEAN ,1,
+                return connection.eval(UNLOCK_LUA.getBytes(), ReturnType.BOOLEAN, 1,
                         key.getBytes(StandardCharsets.UTF_8), value.getBytes(StandardCharsets.UTF_8));
             };
             return Boolean.TRUE == redisTemplate.execute(callback);

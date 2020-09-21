@@ -25,7 +25,7 @@ public class JWTUtil {
 
     public static String createJwt(Map<String, String> params, Algorithm algorithm) {
 
-        String[] audience  = {"app","web"};
+        String[] audience = {"app", "web"};
         JWTCreator.Builder builder = JWT.create();
         builder.withIssuer("auth0");  // 发布者
         builder.withAudience(audience); // 接收者

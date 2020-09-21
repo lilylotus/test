@@ -343,7 +343,6 @@ public class ListCacheServiceImpl implements ListCacheService {
     /**
      * 从存储在键中的列表中删除等于值的元素的第一个计数事件。count> 0：
      * 删除等于从左到右移动的值的第一个元素；count< 0：删除等于从右到左移动的值的第一个元素；count = 0：删除等于value的所有元素。
-     *
      */
     @Override
     public long remove(String key, long count, Object object) {

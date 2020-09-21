@@ -34,7 +34,7 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice<Object>, Ordered
                     "\"data\"" + ":" + "\"" + body + "\"," +
                     "\"message\"" + ":" + "\"MyResponseBodyAdvice 统一请求\"" +
                     "}";
-        } else if ("application".equals(selectedContentType.getType()) && "json".equals(selectedContentType.getSubtype()))  {
+        } else if ("application".equals(selectedContentType.getType()) && "json".equals(selectedContentType.getSubtype())) {
             Map<String, Object> unifyMap = new HashMap<>(8);
             unifyMap.put("apiVersion", "1.0.1");
             unifyMap.put("data", body);

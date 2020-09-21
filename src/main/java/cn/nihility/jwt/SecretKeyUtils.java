@@ -87,13 +87,14 @@ public class SecretKeyUtils {
 
     /**
      * 获取公私钥
+     *
      * @return
      * @throws Exception
      */
     public static synchronized RSA256Key getRSA256Key() throws Exception {
-        if(rsa256Key == null){
-            synchronized (RSA256Key.class){
-                if(rsa256Key == null) {
+        if (rsa256Key == null) {
+            synchronized (RSA256Key.class) {
+                if (rsa256Key == null) {
                     rsa256Key = new RSA256Key();
                     Map<String, Object> map = initKey();
                     rsa256Key.setPrivateKey((RSAPrivateKey) map.get(SecretKeyUtils.PRIVATE_KEY));
@@ -109,9 +110,9 @@ public class SecretKeyUtils {
         try {
             keyMap = initKey();  // 使用 java.security.KeyPairGenerator 生成 公/私钥
             String publicKey = getPublicKey(keyMap);
-            System.out.println("公钥：\n"+publicKey);
+            System.out.println("公钥：\n" + publicKey);
             String privateKey = getPrivateKey(keyMap);
-            System.out.println("私钥：\n"+privateKey);
+            System.out.println("私钥：\n" + privateKey);
         } catch (Exception e) {
             e.printStackTrace();
         }

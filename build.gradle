@@ -127,7 +127,8 @@ bootJar {
     }
     if (!configurations.runtimeClasspath.isEmpty()) {
         //manifest.attributes('Class-Path': '. lib/' + configurations.runtimeClasspath.collect { println it.name ; it.name }.join(' lib/'))
-        manifest.attributes('Class-Path': '. ' + configurations.runtimeClasspath.files.collect { println it.name; "lib/$it.name" }.join(' '))
+        manifest.attributes('Class-Path': '. ' + configurations.runtimeClasspath.files.collect { println it.name;
+            "lib/$it.name" }.join(' '))
     }
 }
 
@@ -145,7 +146,6 @@ task zip(type: Zip, dependsOn: [bootJar]) {
 }
 
 tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
-
 
 
 /*task sourcesJar(type: Jar, dependsOn: classes) {

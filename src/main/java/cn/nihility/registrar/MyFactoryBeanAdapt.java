@@ -21,7 +21,7 @@ public class MyFactoryBeanAdapt implements FactoryBean {
     @Override
     public Object getObject() {
         return Proxy.newProxyInstance(UserMapper.class.getClassLoader(),
-                new Class<?>[] {mapperInterface},
+                new Class<?>[]{mapperInterface},
                 (proxy, method, arg) -> {
                     System.out.println("proxy object : " + proxy.getClass().getName());
                     System.out.println("proxy method : " + method.getName());

@@ -258,7 +258,6 @@ public class KeyValueCacheServiceImpl implements KeyValueCacheService {
 
     /**
      * 设置map集合到redis。
-     *
      */
     @Override
     public void multiSet(Map<String, String> map) {

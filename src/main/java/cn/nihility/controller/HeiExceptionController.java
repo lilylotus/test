@@ -32,4 +32,5 @@ public class HeiExceptionController {
 }
 
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "自己定义的异常")
-class MyException extends Exception { }
+class MyException extends Exception {
+}

@@ -19,8 +19,6 @@ public class RegistrarConfiguration {
     public UserMapper userMapper() {
         return MapperProxy.getProxyUserMapper();
     }*/
-
-
     @Bean
     public Walk personWalkxxxx() {
         return new PersonWalk();

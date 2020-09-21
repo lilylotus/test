@@ -28,6 +28,7 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object>, Ord
 
     /**
      * 对 @ResponseResultBody 注解拦截
+     *
      * @return true 采用了 @ResponseResultBody 注解
      */
     @Override
@@ -67,13 +68,17 @@ public class ResponseResultBodyAdvice implements ResponseBodyAdvice<Object>, Ord
     }
 
 
-    /** 对ResultException类返回返回结果的处理 */
+    /**
+     * 对ResultException类返回返回结果的处理
+     */
     protected ResponseEntity<ResultResponse<?>> handleResultException(ResultException ex, HttpHeaders headers, WebRequest request) {
         return this.handleExceptionInternal(ex, ResultResponse.failure(ex.getResultStatus()),
                 headers, ex.getResultStatus().getHttpStatus(), request);
     }
 
-    /** 异常类的统一处理 */
+    /**
+     * 异常类的统一处理
+     */
     protected ResponseEntity<ResultResponse<?>> handleException(Exception ex, HttpHeaders headers, WebRequest request) {
         return this.handleExceptionInternal(ex, ResultResponse.failure(ex.getMessage()),
                 headers, HttpStatus.INTERNAL_SERVER_ERROR, request);

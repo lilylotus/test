@@ -18,7 +18,8 @@ import java.util.stream.Stream;
 public class LocalAspect {
 
     @Pointcut("execution(* cn.nihility.aspect.*.*(..))")
-    public void addAroundOperation() {}
+    public void addAroundOperation() {
+    }
 
     @Around("addAroundOperation()")
     public Object addAroundPointCut(ProceedingJoinPoint joinPoint) {
@@ -46,7 +47,7 @@ public class LocalAspect {
         System.out.println("method arguments");
         Object[] args = joinPoint.getArgs();
         if (args != null) {
-           String argString = Stream.of(args).map(Object::toString).collect(Collectors.joining(" "));
+            String argString = Stream.of(args).map(Object::toString).collect(Collectors.joining(" "));
             System.out.println(argString);
         }
 

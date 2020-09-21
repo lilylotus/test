@@ -7,7 +7,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class GlobTest {
 
     public static void main(String[] args) throws IOException {
-        String glob =  "glob:**/rolling-file-trace*.gz";
+        String glob = "glob:**/rolling-file-trace*.gz";
         String path = "D:/logger/urm/biz/20200827";
         match(glob, path);
     }

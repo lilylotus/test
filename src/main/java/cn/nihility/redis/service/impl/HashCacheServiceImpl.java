@@ -212,7 +212,6 @@ public class HashCacheServiceImpl implements HashCacheService {
     /**
      * 如果变量值存在，在变量中可以添加不存在的的键值对
      * 如果变量不存在，则新增一个变量，同时将键值对添加到该变量。
-     *
      */
     @Override
     public void putIfAbsent(String key, String hashKey, Object value) {
@@ -222,7 +221,6 @@ public class HashCacheServiceImpl implements HashCacheService {
     /**
      * 匹配获取键值对，ScanOptions.NONE为获取全部键对，ScanOptions.scanOptions().match("map1").build()
      * 匹配获取键位map1的键值对,不能模糊匹配。
-     *
      */
     @Override
     public Cursor<Map.Entry<Object, Object>> scan(String key, ScanOptions options) {

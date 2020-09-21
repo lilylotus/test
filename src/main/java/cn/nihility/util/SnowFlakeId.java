@@ -13,26 +13,25 @@ import java.util.concurrent.Executors;
 
 /**
  * 0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 - 000000000000
- *
+ * <p>
  * 1 位标识，由于 long 基本类型在 Java 中是带符号的，最高位是符号位，正数是 0，负数是 1，所以 id 一般是正数，最高位是 0
  * 41 位时间截(毫秒级)，注意，41 位时间截不是存储当前时间的时间截，而是存储时间截的差值（当前时间截 - 开始时间截)，
- *      开始时间截一般是我们的id生成器开始使用的时间，由我们程序来指定的。
- *      41 位的时间截，可以使用 69 年，年T = (1L << 41) / (1000L * 60 * 60 * 24 * 365) = 69
+ * 开始时间截一般是我们的id生成器开始使用的时间，由我们程序来指定的。
+ * 41 位的时间截，可以使用 69 年，年T = (1L << 41) / (1000L * 60 * 60 * 24 * 365) = 69
  * 10 位的数据机器位，可以部署在 1024 个节点，包括5位 dataCenterId 和 5 位 workerId
  * 12 位序列，毫秒内的计数，12 位的计数顺序号支持每个节点每毫秒(同一机器，同一时间截)产生 4096 个 ID 序号
- *
+ * <p>
  * 加起来刚好 64 位，为一个 Long 型。(转换成字符串后长度最多 19)
  * SnowFlake 的优点是，整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞(由 dataCenter 数据中心 ID 和 workerId 机器 ID 作区分)，并且效率较高，
  * 经测试，SnowFlake 每秒能够产生 26 万 ID 左右。
- *
+ * <p>
  * 优点：
  * 1.毫秒数在高位，自增序列在低位，整个ID都是趋势递增的。
  * 2.不依赖数据库等第三方系统，以服务的方式部署，稳定性更高，生成ID的性能也是非常高的。
  * 3.可以根据自身业务特性分配bit位，非常灵活。
- *
+ * <p>
  * 缺点：
  * 强依赖机器时钟，如果机器上时钟回拨，会导致发号重复或者服务会处于不可用状态。
- *
  */
 public class SnowFlakeId {
 
@@ -56,27 +55,28 @@ public class SnowFlakeId {
      * ~ 表示该数的反码
      */
     private final static long MAX_DATA_CENTER_NUM = ~(-1L << DATA_CENTER_BIT);    // 31
-    private final static long MAX_MACHINE_NUM     = ~(-1L << MACHINE_BIT);        // 31
-    private final static long MAX_SEQUENCE        = ~(-1L << SEQUENCE_BIT);       // 4095
+    private final static long MAX_MACHINE_NUM = ~(-1L << MACHINE_BIT);        // 31
+    private final static long MAX_SEQUENCE = ~(-1L << SEQUENCE_BIT);       // 4095
 
     /**
      * 每一部分向左的位移
      */
-    private final static long MACHINE_LEFT      = SEQUENCE_BIT;
-    private final static long DATA_CENTER_LEFT  = SEQUENCE_BIT + MACHINE_BIT;
-    private final static long TIMESTAMP_LEFT    = DATA_CENTER_LEFT + DATA_CENTER_BIT;
+    private final static long MACHINE_LEFT = SEQUENCE_BIT;
+    private final static long DATA_CENTER_LEFT = SEQUENCE_BIT + MACHINE_BIT;
+    private final static long TIMESTAMP_LEFT = DATA_CENTER_LEFT + DATA_CENTER_BIT;
 
     private volatile long dataCenterId;   //数据中心
     private volatile long machineId;      //机器标识
-    private volatile long sequence  = 0L; //序列号
+    private volatile long sequence = 0L; //序列号
     private volatile long lastStamp = -1L;//上一次时间戳
 
     private static SnowFlakeId snowFlakeId;
 
     /**
      * 实例化
-     * @param dataCenterId  数据中心id
-     * @param machineId     机器标识id
+     *
+     * @param dataCenterId 数据中心id
+     * @param machineId    机器标识id
      */
     public SnowFlakeId(long dataCenterId, long machineId) {
         if (dataCenterId > MAX_DATA_CENTER_NUM || dataCenterId < 0) {
