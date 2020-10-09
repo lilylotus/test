@@ -41,6 +41,12 @@ dependencies {
     /* jwt token */
     implementation 'com.auth0:java-jwt:3.10.3'
 
+    implementation 'cn.hutool:hutool-all:5.4.4'
+    implementation 'com.alibaba:fastjson:1.2.74'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.0'
+
+    implementation 'org.projectlombok:lombok:1.18.14'
+
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
