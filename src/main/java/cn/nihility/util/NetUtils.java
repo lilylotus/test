@@ -18,8 +18,13 @@ public class NetUtils {
     }
 
 
+    /**
+     * 获取指定 网卡 接口的 IP 地址，若是没有指定网卡接口返回所有接口地址集合
+     * @param interfaceName 接口名称
+     * @return 网卡接口地址集合
+     */
     private static List<String> getIPAddress(String interfaceName) throws SocketException {
-        final List<String> ipList = new ArrayList<>(5);
+        final List<String> ipList = new ArrayList<>(6);
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         while (interfaces.hasMoreElements()) {
             NetworkInterface ni = interfaces.nextElement();

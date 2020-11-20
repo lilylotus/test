@@ -1,4 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.nihility.selector2.ImportSelectorStarterConfig, \
+  cn.nihility.registrar2.RegistrarConfig, \
   cn.nihility.registrar.RegistrarConfiguration, \
   cn.nihility.selector.ImportSelectorConfig, \
   cn.nihility.aware.ContextAwareConfig, \

@@ -1,6 +1,5 @@
 package cn.nihility.aspect;
 
-import com.alibaba.fastjson.JSON;
 import lombok.Data;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -21,8 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class RequestLogAspect {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(RequestLogAspect.class);
@@ -38,7 +37,7 @@ public class RequestLogAspect {
         Objects.requireNonNull(attributes.getRequest(), "");
         HttpServletRequest request = attributes.getRequest();
         Object result = proceedingJoinPoint.proceed();
-        RequestInfo requestInfo = new RequestInfo();
+        /*RequestInfo requestInfo = new RequestInfo();
         requestInfo.setIp(request.getRemoteAddr());
         requestInfo.setUrl(request.getRequestURL().toString());
         requestInfo.setHttpMethod(request.getMethod());
@@ -47,7 +46,7 @@ public class RequestLogAspect {
         requestInfo.setRequestParams(getRequestParamsByProceedingJoinPoint(proceedingJoinPoint));
         requestInfo.setResult(result);
         requestInfo.setTimeCost(System.currentTimeMillis() - start);
-        LOGGER.info("Request Info : {}", JSON.toJSONString(requestInfo));
+        LOGGER.info("Request Info : {}", JSON.toJSONString(requestInfo));*/
 
         return result;
     }
@@ -57,7 +56,7 @@ public class RequestLogAspect {
     public void doAfterThrow(JoinPoint joinPoint, RuntimeException e) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        RequestErrorInfo requestErrorInfo = new RequestErrorInfo();
+        /*RequestErrorInfo requestErrorInfo = new RequestErrorInfo();
         requestErrorInfo.setIp(request.getRemoteAddr());
         requestErrorInfo.setUrl(request.getRequestURL().toString());
         requestErrorInfo.setHttpMethod(request.getMethod());
@@ -65,7 +64,7 @@ public class RequestLogAspect {
                 joinPoint.getSignature().getName()));
         requestErrorInfo.setRequestParams(getRequestParamsByJoinPoint(joinPoint));
         requestErrorInfo.setException(e);
-        LOGGER.info("Error Request Info      : {}", JSON.toJSONString(requestErrorInfo));
+        LOGGER.info("Error Request Info      : {}", JSON.toJSONString(requestErrorInfo));*/
     }
 
     /**
